@@ -60,7 +60,7 @@ export interface Options {
 }
 ```
 
-Default Options
+**Default Options**
 
 ```js
 /**
