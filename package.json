@@ -1,0 +1,51 @@
+{
+  "name": "babel-plugin-transform-uiw-import",
+  "version": "1.0.0",
+  "description": "Modular import uiw plugin for babel.",
+  "repository": "https://github.com/uiwjs/babel-plugin-transform-uiw-import",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll --coverage",
+    "build": "babel src --out-dir lib",
+    "watch": "babel src --out-dir lib --verbose -w"
+  },
+  "keywords": [
+    "babel-plugin",
+    "kkt-ssr",
+    "uiw",
+    "ssr"
+  ],
+  "jset": {
+    "bail": true,
+    "verbose": true,
+    "testMatch": [
+      "**/__tests__/**/*.js?(x)",
+      "**/?(*.)+(spec|test).js?(x)"
+    ]
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0"
+  },
+  "dependencies": {
+    "@babel/types": "^7.7.4",
+    "is-valid-path": "^0.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-do-expressions": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/preset-env": "^7.7.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "jest": "^24.9.0"
+  },
+  "files": [
+    "lib",
+    "index.d.ts"
+  ],
+  "author": "Kenny Wong",
+  "license": "MIT"
+}
