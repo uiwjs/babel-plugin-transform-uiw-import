@@ -15,7 +15,7 @@ npm install babel-plugin-transform-uiw-import --save-dev
 
 Via `.babelrc` or `babel-loader`.
 
-```json
+```js
 {
   "plugins": [
     ["babel-plugin-transform-uiw-import"]
