@@ -33,14 +33,14 @@
     "is-valid-path": "^0.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/plugin-proposal-do-expressions": "^7.7.4",
-    "@babel/plugin-proposal-export-default-from": "^7.7.4",
-    "@babel/preset-env": "^7.7.5",
-    "babel-core": "^7.0.0-bridge.0",
-    "jest": "^24.9.0"
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.9.0",
+    "@babel/plugin-proposal-class-properties": "7.8.3",
+    "@babel/plugin-proposal-do-expressions": "7.8.3",
+    "@babel/plugin-proposal-export-default-from": "7.8.3",
+    "@babel/preset-env": "7.9.5",
+    "babel-core": "7.0.0-bridge.0",
+    "jest": "24.9.0"
   },
   "files": [
     "lib",
