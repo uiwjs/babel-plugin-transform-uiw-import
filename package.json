@@ -17,7 +17,7 @@
     "uiw",
     "ssr"
   ],
-  "jset": {
+  "jest": {
     "bail": true,
     "verbose": true,
     "testMatch": [
