@@ -6,14 +6,16 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: '10.x'
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
 
       - run: npm install
       - run: npm run build
@@ -21,14 +23,14 @@ jobs:
 
       - name: Create Tag
         id: create_tag
-        uses: jaywcjlove/create-tag-action@v1.1.7
+        uses: jaywcjlove/create-tag-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           package-path: ./package.json
 
       - name: Generate Changelog
         id: changelog
-        uses: jaywcjlove/changelog-generator@v1.3.9
+        uses: jaywcjlove/changelog-generator@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           head-ref: ${{steps.create_tag.outputs.version}}
@@ -36,14 +38,13 @@ jobs:
           filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
+        uses: ncipollo/release-action@v1
         if: steps.create_tag.outputs.successful
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.create_tag.outputs.version }}
-          release_name: ${{ steps.create_tag.outputs.version }}
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ steps.create_tag.outputs.version }}
+          tag: ${{ steps.create_tag.outputs.version }}
           body: |
             [![](https://img.shields.io/github/issues/uiwjs/babel-plugin-transform-uiw-import.svg)](https://github.com/uiwjs/babel-plugin-transform-uiw-import/releases) [![](https://img.shields.io/github/forks/uiwjs/babel-plugin-transform-uiw-import.svg)](https://github.com/uiwjs/babel-plugin-transform-uiw-import/network) [![](https://img.shields.io/github/stars/uiwjs/babel-plugin-transform-uiw-import.svg)](https://github.com/uiwjs/babel-plugin-transform-uiw-import/stargazers) [![](https://img.shields.io/github/release/uiwjs/babel-plugin-transform-uiw-import.svg)](https://github.com/uiwjs/babel-plugin-transform-uiw-import/releases)
 
@@ -51,8 +52,3 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
